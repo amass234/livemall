@@ -13,6 +13,15 @@ export class ModalUser extends Component {
         console.log(this.props.status)
     }
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
+        });
+    }
+
     render() {
         const formItemLayout = {
             labelCol: {
@@ -35,33 +44,15 @@ export class ModalUser extends Component {
                 title="จัดการข้อมูล"
                 onOk={this.props.handleOk}
                 onCancel={this.props.handleCancel}
-                footer={
-                    <div>
-                        {
-                            this.props.status === 'ผู้ขาย' ?
-                                <div className='footerModel'>
-                                    <Button key='Suspend account' onClick={this.handleCancel}>ระงับบัญชี</Button>
-                                    <Button key='back' onClick={this.props.handleCancel}>ยืนยันบัญชี</Button>
-                                    <Button key='submit' loading={this.props.loading} onClick={this.props.handleOk}>บันทึก </Button>
-                                </div> :
-                                <div className='footerModel'>
-                                    <Button key='Suspend account' onClick={this.handleCancel}>ระงับบัญชี</Button>
-                                    <Button key='submit' loading={this.props.loading} onClick={this.props.handleOk}>บันทึก</Button>
-                                </div>
-                        }
-                    </div>
-                }>
-                <Form>
+                footer={false}
+            >
+                <Form onSubmit={this.handleSubmit}>
                     <FormItem
                         {...formItemLayout}
                         label="บัญชี"
                     >
                         {getFieldDecorator('account', {
-                            rules: [{
-                                type: 'account', message: 'The input is not valid E-mail!',
-                            }, {
-                                required: false, message: 'Please input your E-mail!',
-                            }],
+                            rules: [{ required: true, message: 'กรุณาใส่บัญชี' }],
                             initialValue: this.props.name
                         })(
                             <Input />
@@ -72,11 +63,7 @@ export class ModalUser extends Component {
                         label="รหัสผ่าน"
                     >
                         {getFieldDecorator('password', {
-                            rules: [{
-                                type: 'password', message: 'The input is not valid E-mail!',
-                            }, {
-                                required: false, message: 'Please input your E-mail!',
-                            }],
+                            rules: [{ required: true, message: 'กรุณาใส่รหัสผ่าน' }],
                         })(
                             <Input />
                         )}
@@ -86,11 +73,7 @@ export class ModalUser extends Component {
                         label="ชื่อ"
                     >
                         {getFieldDecorator('firstname', {
-                            rules: [{
-                                type: 'firstname', message: 'The input is not valid E-mail!',
-                            }, {
-                                required: false, message: 'Please input your E-mail!',
-                            }],
+                            rules: [{ required: true, message: 'กรุณาใส่ชื่อ' }],
                         })(
                             <Input />
                         )}
@@ -100,11 +83,7 @@ export class ModalUser extends Component {
                         label="นามสกุล"
                     >
                         {getFieldDecorator('lastname', {
-                            rules: [{
-                                type: 'lastname', message: 'The input is not valid E-mail!',
-                            }, {
-                                required: false, message: 'Please input your E-mail!',
-                            }],
+                            rules: [{ required: true, message: 'กรุณาใส่นามสกุล' }],
                         })(
                             <Input />
                         )}
@@ -114,11 +93,7 @@ export class ModalUser extends Component {
                         label="เบอร์โทรศัพท์"
                     >
                         {getFieldDecorator('tel', {
-                            rules: [{
-                                type: 'tel', message: 'The input is not valid E-mail!',
-                            }, {
-                                required: false, message: 'Please input your E-mail!',
-                            }],
+                            rules: [{ required: true, message: 'กรุณาใส่เบอร์โทรศัพท์' }],
                         })(
                             <Input />
                         )}
@@ -128,11 +103,7 @@ export class ModalUser extends Component {
                         label="วัน/เดือน/ปี"
                     >
                         {getFieldDecorator('birthdate', {
-                            rules: [{
-                                type: 'birthdate', message: 'The input is not valid E-mail!',
-                            }, {
-                                required: false, message: 'Please input your E-mail!',
-                            }],
+                            rules: [{ required: true, message: 'กรุณาใส่ วัน/เดือน/ปี' }],
                         })(
                             <Input />
                         )}
@@ -142,11 +113,7 @@ export class ModalUser extends Component {
                         label="เพศ"
                     >
                         {getFieldDecorator('sex', {
-                            rules: [{
-                                type: 'sex', message: 'The input is not valid E-mail!',
-                            }, {
-                                required: false, message: 'Please input your E-mail!',
-                            }],
+                            rules: [{ required: true, message: 'กรุณาเลือกเพศ' }],
                         })(
                             <Select style={{ width: 120 }} onChange={handleChange}>
                                 <Option value="ชาย">ชาย</Option>
@@ -170,12 +137,8 @@ export class ModalUser extends Component {
                                 {...formItemLayout}
                                 label="แพคเกจ"
                             >
-                                {getFieldDecorator('sex', {
-                                    rules: [{
-                                        type: 'sex', message: 'The input is not valid E-mail!',
-                                    }, {
-                                        required: false, message: 'Please input your E-mail!',
-                                    }],
+                                {getFieldDecorator('package', {
+                                    rules: [{ required: true, message: 'กรุณาเลือกแพคเกจ' }],
                                 })(
                                     <Select style={{ width: 120 }} onChange={handleChange}>
                                         <Option value="ชาย">7 วัน</Option>
@@ -188,12 +151,8 @@ export class ModalUser extends Component {
                                 {...formItemLayout}
                                 label="คงเหลือ"
                             >
-                                {getFieldDecorator('lastname', {
-                                    rules: [{
-                                        type: 'lastname', message: 'The input is not valid E-mail!',
-                                    }, {
-                                        required: false, message: 'Please input your E-mail!',
-                                    }],
+                                {getFieldDecorator('balance', {
+                                    rules: [{ required: true, message: 'กรุณาใส่ยอดคงเหลือ' }],
                                 })(
                                     <Input />
                                 )}
@@ -203,18 +162,31 @@ export class ModalUser extends Component {
                                 {...formItemLayout}
                                 label="ผูกบัญชี"
                             >
-                                {getFieldDecorator('lastname', {
-                                    rules: [{
-                                        type: 'lastname', message: 'The input is not valid E-mail!',
-                                    }, {
-                                        required: false, message: 'Please input your E-mail!',
-                                    }],
+                                {getFieldDecorator('binding', {
+                                    rules: [{ required: true, message: 'กรุณาใส่ ผูกบัญชี' }],
                                 })(
                                     <Input />
                                 )}
                             </FormItem>
                         </div>
                     }
+                    <FormItem>
+                        {
+                            this.props.status === 'ผู้ขาย' ?
+                                <div className='footerModel'>
+                                    <Button key='Suspend account' onClick={this.handleCancel}>ระงับบัญชี</Button>
+                                    {
+                                        !this.props.active &&
+                                        <Button key='back' onClick={this.props.handleCancel}>ยืนยันบัญชี</Button>
+                                    }
+                                    <Button key='submit' htmlType="submit" >บันทึก </Button>
+                                </div> :
+                                <div className='footerModel'>
+                                    <Button key='Suspend account' onClick={this.handleCancel}>ระงับบัญชี</Button>
+                                    <Button key='submit' htmlType="submit" >บันทึก</Button>
+                                </div>
+                        }
+                    </FormItem>
                 </Form>
             </Modal>
         )

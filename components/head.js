@@ -1,16 +1,9 @@
 import React from 'react'
 import NextHead from 'next/head'
 import { string } from 'prop-types'
-import Router from 'next/router'
-import NProgress from 'nprogress'
-
 const defaultDescription = ''
 const defaultOGURL = ''
 const defaultOGImage = ''
-
-Router.onRouteChangeStart = () => NProgress.start()
-Router.onRouteChangeComplete = () => NProgress.done()
-Router.onRouteChangeError = () => NProgress.done()
 
 const Head = props => (
   <NextHead>

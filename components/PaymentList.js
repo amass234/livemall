@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
-import { Table, Form, Select, Input, } from 'antd'
+import { Table, Form, Select, Input, Tag } from 'antd'
 import { Col, Row } from 'reactstrap'
 import CardPayment from './CardPayment';
 import ModalPaymant from './ModalPaymant';
@@ -10,22 +10,22 @@ const data = [{
     key: '1',
     name: 'John Brown',
     age: 32,
-    address: 'New York No. 1 Lake Park',
+    active: true
 }, {
     key: '2',
     name: 'Jim Green',
     age: 42,
-    address: 'London No. 1 Lake Park',
+    active: false
 }, {
     key: '3',
     name: 'Joe Black',
     age: 32,
-    address: 'Sidney No. 1 Lake Park',
+    active: true
 }, {
     key: '4',
     name: 'Jim Red',
     age: 32,
-    address: 'London No. 2 Lake Park',
+    active: true
 }];
 
 function onChange(pagination, filters, sorter) {
@@ -45,9 +45,10 @@ export class PaymentList extends Component {
         visible: false,
     }
 
-    showModal = () => {
+    showModal = (active) => {
         this.setState({
             visible: true,
+            active
         });
     }
     handleOk = () => {
@@ -94,13 +95,13 @@ export class PaymentList extends Component {
             sorter: (a, b) => a.age - b.age,
         }, {
             title: 'สถานะ',
-            dataIndex: 'address',
-        }, {
-            title: '',
-            key: 'action',
-            render: () => (
-                <span>
-                    <a href="javascript:;" onClick={this.showModal}>จัดการ</a>
+            dataIndex: 'active',
+            render: (active) => (
+                <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <div style={{ marginBottom: 10 }}>{active ? <Tag color="#87d068">อนุมัติ</Tag> :
+                        <Tag color="#f50">ยังไม่ได้อนุมัติ</Tag>}
+                    </div>
+                    <a href="javascript:;" onClick={() => this.showModal(active)}>จัดการ</a>
                 </span>
             ),
         }];
@@ -140,7 +141,7 @@ export class PaymentList extends Component {
                     </div>
                     <Table columns={columns} dataSource={data} onChange={onChange} />
                     <ModalPaymant
-                        status={this.state.status}
+                        active={this.state.active}
                         handleOk={this.handleOk}
                         handleCancel={this.handleCancel}
                         visible={this.state.visible}

@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
-import { Layout, Menu, Icon, Avatar } from 'antd';
+import { inject, observer } from 'mobx-react';
+import { Layout, Menu, Icon, Popover } from 'antd';
 import Bread from './Bread'
 
 const { Header, Sider, Footer } = Layout;
 
+@inject('commonStore', 'authStore')
+@observer
 export class Sidebar extends Component {
+
+    componentDidMount() {
+        this.props.authStore.getUser()
+    }
+
     state = {
         collapsed: false,
     };
@@ -16,9 +24,19 @@ export class Sidebar extends Component {
         });
     }
 
+    logOut = () => this.props.authStore.logOut()
+
     render() {
+        const { appname } = this.props.commonStore
+        const { user, email } = this.props.authStore
+        const content = (
+            <div>
+                <a onClick={this.logOut}>Log Out</a>
+            </div>
+        );
+
         return (
-            <Layout id="nprogress" className="bar">
+            <Layout>
                 <Sider
                     breakpoint="lg"
                     collapsedWidth="0"
@@ -27,7 +45,7 @@ export class Sidebar extends Component {
                 >
                     <div className="logo">
                         <img src='/static/ic_logo_square@3x.png' width='40' height='40' alt='logo' />
-                        <h5 style={{ color: '#fff' }}>Live Mall</h5>
+                        <h5 style={{ color: '#fff' }}>{appname}</h5>
                     </div>
                     <div className="menubar">
                         <Menu theme="dark" mode="inline" selectedKeys={[this.props.id]}>
@@ -80,7 +98,11 @@ export class Sidebar extends Component {
                             <div style={{ display: 'flex', alignItems: 'center', }}>
                                 <h6 style={{ marginRight: 10 }}>
                                     <img src='/static/ic_logo_square@3x.png' width='40' height='40' alt='logo' />
-                                    <span style={{ marginLeft: 10 }} />Live Mall Admin
+                                    <span style={{ marginLeft: 10 }} />{appname}
+                                    {!user ? <Link href='/login' > Login</Link>
+                                        :
+                                        <Popover placement='bottomRight' content={content}> {email} </Popover>
+                                    }
                                 </h6>
                             </div>
                         </Header>

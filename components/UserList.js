@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import Link from 'next/link'
 import { List, Avatar, Form, Select, Tag, Input, Layout } from 'antd'
 import { Col, Row } from 'reactstrap'
+import { inject, observer } from 'mobx-react';
+
 import CardUser from './CardUser'
 import ModalUser from './ModalUser';
 import LayoutBase from './LayoutBase';
+
 
 const data = [
     {
@@ -38,16 +41,23 @@ function handleChange(value) {
     console.log(`selected ${value}`);
 }
 
+@inject('userStore', 'authStore')
+@observer
 export class UserList extends Component {
     state = {
         loading: false,
         visible: false,
     }
 
-    showModal = (status) => {
+    componentDidMount(){
+        this.props.userStore.getDataTest()
+    }
+
+    showModal = (status, active) => {
         this.setState({
             visible: true,
-            status
+            status,
+            active
         });
     }
     handleOk = () => {
@@ -147,13 +157,14 @@ export class UserList extends Component {
                                         </div>
                                     </Col>
                                     <Col style={{ textAlign: 'right' }}>
-                                        <a href="javascript:;" onClick={() => this.showModal(item.status)}>จัดการ</a>
+                                        <a href="javascript:;" onClick={() => this.showModal(item.status, item.active)}>จัดการ</a>
                                     </Col>
                                 </Row>
                             </List.Item>
                         )}
                     />
                     <ModalUser
+                        active={this.state.active}
                         status={this.state.status}
                         handleOk={this.handleOk}
                         handleCancel={this.handleCancel}

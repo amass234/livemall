@@ -26,12 +26,7 @@ export class ModalPaymant extends Component {
                     title="จัดการข้อมูล"
                     onOk={this.props.handleOk}
                     onCancel={this.props.handleCancel}
-                    footer={[
-                        <div className='footerModel'>
-                            <Button style={{background: '#00b42d'}} key='Suspend account' onClick={this.handleCancel}>อนุมัติ</Button>
-                            <Button key='submit' loading={this.props.loading} onClick={this.props.handleOk}>ตกลง </Button>
-                        </div>
-                    ]}
+                    footer={false}
                 >
                     <Form>
                         <FormItem
@@ -109,6 +104,12 @@ export class ModalPaymant extends Component {
                             label="สลีปการโอน"
                         >
                             <div style={{ width: 100, height: 100, background: '#444' }} />
+                        </FormItem>
+                        <FormItem>
+                            <div className='footerModel' style={{ display: 'block' }}>
+                                <Button type="default" style={{ background: '#00b42d' }} disabled={this.props.active} key='Suspend account' onClick={this.handleCancel}>อนุมัติ</Button>
+                                <Button key='submit' style={{ float: 'right' }} loading={this.props.loading} onClick={this.props.handleOk}>ตกลง </Button>
+                            </div>
                         </FormItem>
                     </Form>
                 </Modal>

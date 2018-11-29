@@ -159,7 +159,7 @@
 .footerModel button{
     width: 28%;
     border-radius: 0.7em;
-    margin: 0 1em 1em;
+    margin: 2em 1em 0 1em;
     color: #fff;
     height: 2.5em
 }

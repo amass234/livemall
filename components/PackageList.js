@@ -25,6 +25,12 @@ const data = [
         price: '399',
         active: true,
     },
+    {
+        title: 'แพจเกจทดลองขาย 2 เดือน',
+        description: 'จำนวนครั้งที่ซื้อ : 42 ครั้ง',
+        price: '399',
+        active: true,
+    },
 ];
 
 export class PackageList extends Component {
@@ -72,7 +78,7 @@ export class PackageList extends Component {
                             onChange: (page) => {
                                 console.log(page);
                             },
-                            pageSize: 4,
+                            pageSize: 3,
                         }}
                         dataSource={data}
                         renderItem={item => (
