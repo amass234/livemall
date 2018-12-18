@@ -1,14 +1,12 @@
 import React from 'react'
-import Head from '../components/head'
-import Sidebar from '../components/Sidebar'
 import { withRouter } from 'next/router'
+import Login from '../components/Login';
+import Head from '../components/head'
 
 const Home = () => (
   <div>
-    <Head title="Home" />
-    <Sidebar id={this.props.router.query.id}>
-      <h1>TEST POST Home</h1>
-    </Sidebar>
+    <Head title="Login Live Mall" />
+    <Login/>
   </div>
 )
 

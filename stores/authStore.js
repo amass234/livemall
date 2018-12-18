@@ -7,7 +7,7 @@ class AuthStore {
 
     @observable errors = undefined;
     @observable loading = false;
-    @observable user
+    @observable user = null
     @observable uid = ''
     @observable username = ''
     @observable avatar = ''
