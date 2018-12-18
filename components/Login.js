@@ -12,7 +12,7 @@ export class Login extends Component {
   handleEmailChange = () => this.props.authStore.setEmail(email.value);
   handlePasswordChange = () => this.props.authStore.setPassword(password.value);
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.authStore.getUser()
   }
 
