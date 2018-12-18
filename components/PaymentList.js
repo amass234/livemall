@@ -9,21 +9,29 @@ import LayoutBase from './LayoutBase';
 const data = [{
     key: '1',
     name: 'John Brown',
+    bank: 'John Brown',
+    date: '10-10-2010',
     age: 32,
     active: true
 }, {
     key: '2',
     name: 'Jim Green',
+    bank: 'John Brown',
+    date: '10-10-2010',
     age: 42,
     active: false
 }, {
     key: '3',
     name: 'Joe Black',
+    date: '10-10-2010',
+    bank: 'John Brown',
     age: 32,
     active: true
 }, {
     key: '4',
     name: 'Jim Red',
+    bank: 'John Brown',
+    date: '10-10-2010',
     age: 32,
     active: true
 }];
@@ -86,13 +94,13 @@ export class PaymentList extends Component {
             sorter: (a, b) => a.age - b.age,
         }, {
             title: 'ธนาคาร',
-            dataIndex: 'age',
+            dataIndex: 'bank',
             defaultSortOrder: 'descend',
         }, {
             title: 'วันและเวลา',
-            dataIndex: 'age',
+            dataIndex: 'date',
             defaultSortOrder: 'descend',
-            sorter: (a, b) => a.age - b.age,
+            sorter: (a, b) => a.date - b.date,
         }, {
             title: 'สถานะ',
             dataIndex: 'active',
@@ -123,7 +131,7 @@ export class PaymentList extends Component {
                                 <Col sm="6">
                                     <FormItem {...formItemLayout} label="ธนาคาร">
                                         {getFieldDecorator('searchs')(
-                                            <Select defaultValue="lucy"
+                                            <Select
                                                 style={{ width: 120 }}
                                                 onChange={handleChange}
                                                 placeholder="ธนาคาร"

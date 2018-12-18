@@ -106,7 +106,7 @@ export class Sidebar extends Component {
                                 </h6>
                             </div>
                         </Header>
-                        <Bread />
+                        <Bread page={this.props.id} />
                         {this.props.children}
                         <Footer style={{ textAlign: 'center' }}>
                             Livemall ©2018 Created by COMIOX

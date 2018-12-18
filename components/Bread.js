@@ -9,12 +9,11 @@ export class Bread extends Component {
                     <Breadcrumb.Item href="">
                         <Icon type="home" />
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item href="">
-                        <Icon type="user" />
-                        <span>Application List</span>
+                    <Breadcrumb.Item href="/user?id=user">
+                        <span>Live Mall</span>
                     </Breadcrumb.Item>
                     <Breadcrumb.Item>
-                        Application
+                        {this.props.page}
                     </Breadcrumb.Item>
                 </Breadcrumb>
             </div>

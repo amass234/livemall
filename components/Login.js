@@ -19,12 +19,19 @@ export class Login extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const {loading} = this.props.authStore
+    const { loading } = this.props.authStore
     return (
       <Layout>
         <Content>
           <div className="login_page">
             <Form onSubmit={this.handleSubmitForm} className="login-form">
+              <div style={{
+                margin: ' 1em auto 5em ',
+                textAlign: 'center',
+              }}>
+                <img src='./static/ic_logo_square@3x.png' width="120" />
+                <h6 style={{ fontWeight: '100', margin: 10 }}>Live Mall Control Panel</h6>
+              </div>
               <h6 style={{ textAlign: 'center', margin: '1em', color: 'rgb(0, 124, 255)' }}>เข้าสู่ระบบ</h6>
               <FormItem>
                 {getFieldDecorator('email', {
@@ -41,6 +48,7 @@ export class Login extends Component {
                   rules: [{ required: true, message: 'Please input your Password!' }],
                 })(
                   <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    style={{ marginTop: '1.6em' }}
                     type="password"
                     placeholder="Password"
                     onChange={this.handlePasswordChange}
@@ -54,14 +62,14 @@ export class Login extends Component {
                 })(
                   <Checkbox>เข้าสู่ระบบอัตโนมัติ</Checkbox>
                 )}
-                <Button loading={loading} type="primary" htmlType="submit" className="login-form-button">
+                <Button style={{ background: '#28a745', marginTop: '3em' }} loading={loading} type="primary" htmlType="submit" className="login-form-button">
                   Log in
             </Button>
               </FormItem>
             </Form>
           </div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Livemall ©2018 Created by COMIOX</Footer>
+        <Footer style={{ textAlign: 'center' }}>Livemall ©2018</Footer>
       </Layout>
     );
   }

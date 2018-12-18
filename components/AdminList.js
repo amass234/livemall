@@ -16,23 +16,27 @@ function onChange(pagination, filters, sorter) {
 const data = [{
     key: '1',
     name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
+    email: 'test@admin.com',
+    tel: '09115852221',
+    category: 'test1',
 }, {
     key: '2',
     name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
+    email: 'test@admin.com',
+    tel: '09115852221',
+    category: 'test1',
 }, {
     key: '3',
     name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
+    email: 'test@admin.com',
+    tel: '09115852221',
+    category: 'test1',
 }, {
     key: '4',
     name: 'Jim Red',
-    age: 32,
-    address: 'London No. 2 Lake Park',
+    email: 'test@admin.com',
+    tel: '09115852221',
+    category: 'test1',
 }];
 
 export class AdminList extends Component {
@@ -65,17 +69,17 @@ export class AdminList extends Component {
             dataIndex: 'name',
         }, {
             title: 'E-mail',
-            dataIndex: 'age',
+            dataIndex: 'email',
             defaultSortOrder: 'descend',
-            sorter: (a, b) => a.age - b.age,
+            sorter: (a, b) => a.email - b.email,
         }, {
             title: 'เบอร์ติดต่อ',
-            dataIndex: 'age',
+            dataIndex: 'tel',
             defaultSortOrder: 'descend',
-            sorter: (a, b) => a.age.length - b.age.length,
+            sorter: (a, b) => a.tel - b.tel,
         }, {
             title: 'ประเภท',
-            dataIndex: 'age',
+            dataIndex: 'category',
             defaultSortOrder: 'descend',
         }
         ];

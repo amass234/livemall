@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { List, Avatar, Form, Button, Modal, Icon, Input, Upload, Select, Tag } from 'antd'
 import { Col, Row } from 'reactstrap'
 import LayoutBase from './LayoutBase';
+import { inject, observer } from 'mobx-react';
 
 const FormItem = Form.Item;
 
@@ -57,10 +58,16 @@ const props = {
     },
 };
 
+@inject('categoryStore', 'authStore')
+@observer
 export class LogList extends Component {
     state = {
         loading: false,
         visible: false,
+    }
+
+    componentDidMount(){
+        this.props.categoryStore.getcategoly()
     }
 
     showModal = () => {
